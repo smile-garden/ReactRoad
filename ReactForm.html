@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>reactForm</title>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+	<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+	<div id="input"></div>
+	<!-- 在子组件上使用表单 -->
+	<div id="zform"></div>
+	<!-- 点击事件 -->
+	<div id="button"></div>
+	<!-- 在子组件上更新表单 -->
+	<div id="zbut"></div>
+	<!-- 特殊属性ref -->
+	<div id="example"></div>
+
+	<script type="text/babel">
+		var Mycomponent = React.createClass({
+			handleClick: function(){
+				/*使用原生的DOM API获取焦点*/
+				this.refs.myInput.focus();
+			},
+			render: function() {
+				// 当组件插入到DOM后，ref属性添加一个组件的引用于到this.refs
+				return (
+					<div>
+						<input type="text" ref="myInput" />
+						<input type="button" value="点击我输入框获取焦点" onClick={this.handleClick} />
+					</div>
+				)
+			}
+		});
+		ReactDOM.render(
+			<Mycomponent />,
+			document.getElementById('example')
+		);
+
+		var Bcontent = React.createClass({
+			render: function(){
+				return (
+					<div>
+						<button onClick={this.props.mClick}>点我看看有什么不同</button>
+						<h2>{this.props.myValue}</h2>
+					</div>
+				)
+			}
+		});
+		var Zbut = React.createClass({
+			getInitialState: function() {
+				return {value: '我会变的，不信点点看'}
+			},
+
+			handleChange: function() {
+				this.setState({value: '是不是变了'})
+			},
+
+			render: function() {
+				var value = this.state.value;
+				return (
+					<Bcontent myValue={value} mClick={this.handleChange} />
+				)
+			}
+		});
+		ReactDOM.render(
+			<Zbut />,
+			document.getElementById('zbut')
+		);
+
+		var button = {
+			color: 'red'
+		};
+		var Button = React.createClass({
+			getInitialState: function() {
+				return {value: '点击事件'}
+			},
+			handleChange:function() {
+				this.setState({value: '找我的对吧'});
+			},
+			render: function() {
+				var but = this.state.value;
+				return (
+					<div>
+						<button style={button} onClick={this.handleChange}>点我来吧</button>
+						<h1>{but}</h1>
+					</div>
+				)
+			}
+		});
+		ReactDOM.render(
+			<Button />,
+			document.getElementById('button')
+		);
+
+		var istyle = {
+			color: '#4285f4',
+			fontSize: 16,
+		};
+		var hstyle = {
+			color: 'red',
+			fontSize: 30,
+			fontWeight: 100
+		}
+		var Input = React.createClass({
+			getInitialState: function() {
+				return {
+					value: 'yixiaojiayou'
+				};
+			},
+			handleChange: function(event) {
+				this.setState({value: event.target.value})
+			},
+			render: function() {
+				var value = this.state.value;
+				return (
+					<div>
+						<input type="text" style={istyle} value={value} onChange={this.handleChange} />
+						<h3 style={hstyle} >{value}</h3>
+					</div>
+				)
+			}
+		});
+		ReactDOM.render(
+			<Input />,
+			document.getElementById('input')
+		);
+
+		var Content = React.createClass({
+			render: function() {
+				return (
+					<div>
+						<input type="text" value={this.props.myProp} onChange={this.props.update} />
+						<h3>{this.props.myProp}</h3>
+					</div>
+				)
+			}
+		});
+		var Zform = React.createClass({
+			getInitialState: function() {
+				return {
+					value: '窝友科技有限公司'
+				};
+			},
+
+			handleChange: function(event) {
+				this.setState({value: event.target.value})
+			},
+
+			render: function() {
+				var value = this.state.value;
+				return (
+					<Content myProp={value} update={this.handleChange} />
+				)
+			}
+		});
+		ReactDOM.render(
+			<Zform />,
+			document.getElementById('zform')
+		);
+	</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Hello React!</title>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+		<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="yixiao"></div>
+		<div id="html"></div>
+		<div id="zhujian"></div>
+		<div id="fuhezhujian"></div>
+		<div id="state"></div>
+		<div id="lianxi"></div>
+		<div id="props"></div>
+		<div id="propsstate"></div>
+		<div id="validator"></div>
+		<script type="text/babel">
+		var title="laksdjfl;adj";
+		var Title = React.createClass({
+			propTypes: {
+				title: React.PropTypes.string.isRequired,
+			},
+
+			render: function(){
+				return <div>{this.props.title}</div>
+			}
+		});
+		ReactDOM.render(
+			<Title title={title}/>,
+			document.getElementById('validator')
+		);
+
+		var Web =React.createClass({
+			getInitialState: function() {
+				return {
+					name: '你猜不猜',
+					site: 'http://www.runoob.com'
+				};
+			},
+			render: function(){
+				return (
+					<div>
+						<Namee name={this.state.name} />
+						<Site site={this.state.site} />
+					</div>
+				);
+			}
+		});
+		var Namee =React.createClass({
+			render: function(){
+				return (
+					<h1>{this.props.name}</h1>
+				);
+			}
+		});
+		var Site = React.createClass({
+			render: function(){
+				return (
+					<a href={this.props.site}>我是菜鸟一枚</a>
+				)
+			}
+		});
+		ReactDOM.render(
+			<Web />,
+			document.getElementById('propsstate')
+		);
+		</script>
+		<script type="text/babel">
+			var i = 14;
+			var mystyle = {
+				color: 'red',
+				fontWeight: 100
+			}; 
+			var arr =[
+				<h1>很好很好</h1>,
+				<h1>好就是好</h1>
+			];
+			ReactDOM.render(
+				// 我在做个注释
+				<div>
+					<h1>你好，一笑</h1>
+					<h2 style={mystyle}>欢迎来到窝友科技</h2>
+					{/* 注释 */}
+					<h1>{1 + 1}</h1>
+					<h1>{i == 1 ? 'ture' : 'false'}</h1>
+					<div>{arr}</div>
+				</div>,
+				document.getElementById('yixiao')
+			);
+
+			var hello = <div className="fa"/>;//标签
+			ReactDOM.render(hello, document.getElementById('html'));
+
+			var Hello = React.createClass({
+				render: function(){
+					return <div>我的组件来啦{this.props.city}</div>
+				}
+			});
+			ReactDOM.render(
+				<Hello city="杭州" />,
+				document.getElementById('zhujian')
+			);
+
+			var Info = React.createClass({
+				render: function() {
+					return (
+						<div>
+							<Provice provice={this.props.provice} />
+							<City city={this.props.city} />
+							<Name name={this.props.name} />
+						</div>
+					)
+				}
+			});
+			var Provice = React.createClass({
+				render: function(){
+					return <div>{this.props.provice}</div>
+				}
+			});
+			var City = React.createClass({
+				render: function(){
+					return <div>{this.props.city}</div>
+				}
+			});
+			var Name = React.createClass({
+				render: function(){
+					return <a href={this.props.name} >{this.props.name}</a>
+				}
+			});
+			ReactDOM.render(
+				<Info provice="浙江" city="杭州" name="https://www.baidu.com" />,
+				document.getElementById('fuhezhujian')
+			);
+
+			var StateButton = React.createClass({
+				getInitialState: function() {
+					return {doing: false};
+				},
+				handleClick:function(){
+					this.setState({doing: !this.state.doing});
+				},
+				render:function(){
+					var statu = this.state.doing ? '正在做' : '歇一会儿哈';
+					return (
+						<p onClick={this.handleClick}>
+							点我看我在干嘛？<div style={mystyle}>{statu}</div>
+						</p>
+					)
+				}
+			});
+			ReactDOM.render(
+				<StateButton />,
+				document.getElementById('state')
+			);
+
+			var StateReview = React.createClass({
+				getInitialState: function(){
+					return {doing: false};
+				},
+				handleClick: function(){
+					this.setState({doing: !this.state.doing });
+				},
+				render: function(){
+					var statu = this.state.doing ? 'zhengzaizhuo' : 'lasdjfla';
+					return (
+						<p onClick={this.handleClick}>
+							alkdfjafja{statu}
+						</p>
+					)
+				}
+			});
+			ReactDOM.render(
+				<StateReview />,
+				document.getElementById('lianxi')
+			);
+
+			var Hoo = React.createClass({
+				getDefaultProps: function(){
+					return {
+						aa:'hahahaha'
+					};
+				},
+				render: function() {
+					return <h1>{this.props.aa}</h1>
+				}
+			});
+			ReactDOM.render(
+				<Hoo />,
+				document.getElementById('props')
+			);
+		</script>
+	</body>
+</html>

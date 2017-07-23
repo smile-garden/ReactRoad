@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React</title>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+	<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+	<div id="yixiao"></div>
+	<div id="html"></div>
+	<div id="zujian"></div>
+	<div id="fuhe"></div>
+	<div id="state"></div>	
+	<script type="text/babel">
+		var i = 1;
+		var myClass = {
+			color: 'red',
+			fontSize: 20
+		}
+		ReactDOM.render(
+			<div>
+				<div style={myClass}>你好吗  我的伙伴们</div>
+				<h2>{1+2}</h2>
+				<h3>{ i == 1 ? 'woshi1' : 'wokebushi1'}</h3>
+			</div>,
+			document.getElementById('yixiao')
+		);
+
+		var hello = <div>hello你好你好你好</div>;
+		ReactDOM.render(
+			hello,
+			document.getElementById('html')
+		);
+
+		var Hello = React.createClass({
+			render: function(){
+				return (<div>hello你{this.props.name}</div>)
+			}
+		});
+		ReactDOM.render(
+			<Hello name="hangzhou" />,
+			document.getElementById('zujian')
+		);
+
+		var Info = React.createClass({
+			render: function(){
+				return (
+					<div>
+						<City city={this.props.city} />
+						<Name name={this.props.name} />
+					</div>)
+			}
+		})
+		var City = React.createClass({
+			render: function(){
+				return (<div>{this.props.city}</div>)
+			}
+		});
+		var Name = React.createClass({
+			render: function(){
+				return (<div>{this.props.name}</div>)
+			}
+		});
+		ReactDOM.render(
+			<Info city="杭州" name="一笑" />,
+			document.getElementById('fuhe')
+		);
+
+		var StateButton = React.createClass({
+			getInitialState: function(){
+				return {doing:false};
+			},
+			handleClick: function(){
+				this.setState({doing: !this.state.doing});
+			},
+			render: function(){
+				var statu = this.state.doing ? '我是中文' : 'nihaodskhfkjadjfhas';
+				return (
+					<p onClick={this.handleClick}>
+						什么语言？？？{statu}
+					</p>
+				)
+			}
+		});
+		ReactDOM.render(
+			<StateButton />,
+			document.getElementById('state')
+		);
+	</script>
+</body>
+</html>

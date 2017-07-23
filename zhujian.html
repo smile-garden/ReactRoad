@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Recatzujian</title>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+	<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+	<div id="message"></div>
+	<div id="opacity"></div>
+	<div id="button"></div>
+
+	<script type="text/babel">
+		var Counter = React.createClass({
+			getInitialState: function() {
+				return {clickCount: 0};
+			},
+			handleClick: function() {
+				this.setState(function(state) {
+					console.log(state);
+					return {clickCount: state.clickCount+1};
+				});
+			},
+			render:function() {
+				return <h2 onClick={this.handleClick}>点我啊？？？点击次数为：{this.state.clickCount}</h2>
+			}
+		});
+		ReactDOM.render(
+			<Counter />,
+			document.getElementById('message')
+		);
+
+		var Opacity = React.createClass({
+			getInitialState: function() {
+				return {
+					opacity: 1.0
+				};
+			},
+
+			componentDidMount: function() {
+				this.timer = setInterval(function() {
+					var opacity = this.state.opacity;
+					opacity -= .05;
+					if (opacity < 0.1) {
+						opacity = 1.0;
+					};
+					this.setState({
+						opacity: opacity
+					});
+				}.bind(this), 100);
+			},
+
+			render: function(){
+				return (
+					<div style={{opacity:this.state.opacity}}>
+						Hello {this.props.name}
+					</div>
+				)
+			}
+		});
+		ReactDOM.render(
+			<Opacity name="一笑" />,
+			document.getElementById('opacity')
+		);
+
+		var Button = React.createClass({
+			getInitialState: function(){
+				return {
+					data: 0
+				}
+			},
+			setNewNmber: function(){
+				this.setState({data: this.state.data + 1})
+			},
+			render: function(){
+				return (
+					<div>
+						<button onClick={this.setNewNmber}>counter</button>
+						<Content num={this.state.data}/>
+					</div>
+				)
+			}
+		});
+		var Content = React.createClass({
+			componentWillMount:function() {       ///在渲染前调用，在客户端也在服务端
+				console.log('component will mount')
+			},
+			componentDidMount:function(){        /////在第一次渲染后调用，只在客户端
+				console.log('component did mount')
+			},
+			componentWillReceiveProps:function(newProps) {
+				console.log('componentWillReceiveProps')
+			},
+			shouldComponentUpdate:function(newProps, newState) {
+				return true;
+			},
+			componentWillUpdate:function(nextProps, newState) {
+				console.log('componentWillUpdate');
+			},
+			componentDidUpdate:function(prevProps, prevState) {
+				console.log('componentDidUpdate');
+			},
+			componentWillUnmount:function() {
+				console.log('componentWillUnmount')
+			},
+
+			render: function() {
+				return (
+					<div>
+						<h1>{this.props.num}</h1>
+					</div>
+				)
+			}
+		});
+		ReactDOM.render(
+			<Button />,
+			document.getElementById('button')
+		)
+	</script>
+</body>
+</html>
