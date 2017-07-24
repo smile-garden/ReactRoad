@@ -1,30 +1,30 @@
-1、React核心思想是：封装组件。br <br>
-2、各个组件维护自己的状态和UI，当状态变更，自动更新渲染整个组件。br <br>
-3、React大体包含下面这些概念  组件  JSX  Virtual DOM   Data Flowbr <br>
+1、React核心思想是：封装组件。 <br>
+2、各个组件维护自己的状态和UI，当状态变更，自动更新渲染整个组件。 <br>
+3、React大体包含下面这些概念  组件  JSX  Virtual DOM   Data Flow <br>
 
 
-1、react.min.js   React的核心库br <br>
-2、react-dom.min.js  提供与DOM相关的功能br <br>
-3、babel.min.js  可以将ES6代码转换为ES5代码，br <br>
+1、react.min.js   React的核心库 <br>
+2、react-dom.min.js  提供与DOM相关的功能 <br>
+3、babel.min.js  可以将ES6代码转换为ES5代码， <br>
 
 
-常用命令br <br>
-1、npm startbr <br>
-2、npm run buildbr <br>
-3、npm testbr <br>
+常用命令 <br>
+1、npm start <br>
+2、npm run build <br>
+3、npm test <br>
 4、npm run eject
 
-1、create-react-app name 创建一个react应用br <br>
-2、解决创建react应用 拉取各种资源慢的问题  用淘宝资源br <br>
-npm config set registry https://registry.npm.taobao.orgbr <br>
+1、create-react-app name 创建一个react应用 <br>
+2、解决创建react应用 拉取各种资源慢的问题  用淘宝资源 <br>
+npm config set registry https://registry.npm.taobao.org <br>
 npm config get registry
 
-1、jsx执行更快；  类型安全，在编译过程中就能发现错误；  使用jsx编写模板更加简单快捷。br <br>
-2、多个html标签 需要使用一个div元素包裹 br <br>
+1、jsx执行更快；  类型安全，在编译过程中就能发现错误；  使用jsx编写模板更加简单快捷。 <br>
+2、多个html标签 需要使用一个div元素包裹  <br>
 3、添加自定义属性需使用data-前缀
 
 
-1、在JSX中使用js表达式。表达式写在{}花括号中。不能使用if else，但可以使用conditional（三元表达式）来替代br <br>。
+1、在JSX中使用js表达式。表达式写在{}花括号中。不能使用if else，但可以使用conditional（三元表达式）来替代 <br>。
 
 
 1、React推荐使用内联样式  camelCase语法来设置内联样式 <br>
