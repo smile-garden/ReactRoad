@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>导航栏</title>
+	<script src="js/jquery.min.js"></script>
+	<link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+	<div id="container"></div>
+
+	<script type="text/javascript">
+		var data = [
+			{name: 'red',value: 'red'},
+			{name: 'blue',value: 'blue'},
+			{name: 'yellow',value: 'yellow'},
+			{name: 'green',value: 'green'},
+			{name: 'white',value: 'white'},
+		];
+
+		$.fn.Tabselector = function(options) {
+
+			var arr = ['<div class="tab-selector">'];         
+			arr.push('<label>', options.label, '</label>');
+			arr.push('<ul>');
+			options.data.forEach(function(item) {
+				arr.push('<li data-value=">',item.value, '">');
+				arr.push(item.name);
+				arr.push('</li>');
+			});
+			arr.push('</ul></div>');
+
+			this.html(arr.join(''));
+			var lastSelected = null;
+			this.on('click', 'li', function() {
+				var $this = $(this);
+				if (lastSelected) {
+					lastSelected.removeClass('selected');
+				};
+				$this.addClass('selected');
+				lastSelected = $this;
+			});
+
+			return this;
+		}
+
+		$('#container').Tabselector({data: data,selected: null, label: '看看你喜欢什么Color'});
+	</script>
+</body>
+</html>

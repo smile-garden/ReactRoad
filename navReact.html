@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ReactNav</title>
+	<script src="js/react.js"></script>
+    <script src="js/JSXTransformer.js"></script>
+    <link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+	<div id="container"></div>
+	
+	<script type="text/jsx">
+		var data = [
+			{name: 'red', value: 'red'},
+			{name: 'green', value: 'green'},
+			{name: 'blue', value: 'blue'},
+			{name: 'pink', value: 'pink'},
+			{name: 'orange', value: 'orange'}
+		];
+		var Nav = React.createClass({
+			getInitialState: function() {
+				return {selected: this.props.selected};
+			},
+			handleClick: function(ev) {
+				this.setState({selected: ev.target.getAttribute('data-value')});
+			},
+			render: function() {
+				var tabs = this.props.data.map(function(item) {
+					var selected = item.value ==this.state.selected ? 'selected' : '';
+					return <li data-value={item.value} className={selected} style={{background: item.value}} onClick={this.handleClick}>{item.name}</li>;
+				}, this);
+				return <div className="tab-selector">
+				<label>{this.props.label}</label>
+				<ul>
+					{tabs}
+				</ul>
+				</div>
+			}
+		});
+
+		React.render(
+			Nav({label: '来看看我们是什么颜色', data: data, selected: null}),
+			document.getElementById('container')
+		);
+	</script>
+</body>
+</html>
